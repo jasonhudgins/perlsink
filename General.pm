@@ -1,5 +1,6 @@
 # just some general routines for throwing around and manipulating
 # files and directories.
+# $Id: General.pm,v 1.4 2003-07-18 07:15:23 thanatos Exp $
 
 package General;
 
@@ -20,15 +21,11 @@ sub slurp_files {
     # turn that into an array
   my @dirs;
   while(my $sub_dir = readdir(DIRS)) {
-    if($sub_dir ne "thumbnails") {
+    if($sub_dir ne "." && $sub_dir ne "..") {
       push @dirs, $dir ."/" . $sub_dir;
     }
   }
   closedir DIRS;
-
-    # pop off . and ..
-  shift @dirs;
-  shift @dirs;
 
    # and return them happily.
   return @dirs;
@@ -221,7 +218,7 @@ sub get_ext {
   return pop @elts;
 }
 
-# lowercase all the files in a passed directory
+  # lowercase all the files in a passed directory
 sub lowercase_dir {
   my $self = shift;
   my ($dir) = @_;
@@ -246,7 +243,7 @@ sub lowercase_dir {
   }
 }
 
-# lowercase all the files in a passed directory
+  # lowercase all the files in a passed directory
 sub remove_parens {
   my $self = shift;
   my ($dir) = @_;
@@ -264,7 +261,7 @@ sub remove_parens {
 }
 
 
-# this routine removes grabs non jpeg files from a directory.
+  # this routine removes grabs non jpeg files from a directory.
 sub slurp_non_jpgs {
   my $self = shift;
   my ($dir) = @_;
@@ -311,8 +308,8 @@ sub slurp_non_images {
   return @dirs;
 }
 
-# this routine builds an array of all the filenames that
-# do  appear to be jpgs from a directory.
+  # this routine builds an array of all the filenames that
+  # do  appear to be jpgs from a directory.
 sub slurp_jpgs {
   my $self = shift;
   my ($dir) = @_;
@@ -335,8 +332,8 @@ sub slurp_jpgs {
   return @dirs;
 }
 
-# this routine builds an array of all the filenames that
-# do appear to be movies from a directory.
+  # this routine builds an array of all the filenames that
+  # do appear to be movies from a directory.
 sub slurp_movies {
   my $self = shift;
   my ($dir) = @_;
@@ -366,8 +363,8 @@ sub slurp_movies {
   return @dirs;
 }
 
-# this routine builds an array of all the filenames that
-# do NOT appear to be movies from a directory.
+  # this routine builds an array of all the filenames that
+  # do NOT appear to be movies from a directory.
 sub slurp_non_movies {
   my $self = shift;
   my ($dir) = @_;
